@@ -16,6 +16,10 @@ body{
     background-color:lightseagreen;
     color: rgb(253, 250, 249);
 }
+.main{
+    width: 100vw;
+    height: auto;
+}
 .navbar{
     width: 50%;
 }
@@ -32,9 +36,34 @@ body{
     font-size: 1.2rem;
     color: white;
 }
+.loading{
+    margin:5%;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    border:3px solid transparent;
+    border-top:3px solid lightseagreen;;
+    animation:spin 0.8s linear infinite;
+}
+@keyframes spin{
+    0%{
+        transform:rotate(0deg);
+    }
+    100%{
+        transform:rotate(360deg);}    
+}
+.quotes{
+    text-align: center;
+}
+.todoList{
+    text-align: center;
+    margin-top:5rem;
+
+}
 .form{
     padding: 1rem;
     width:auto;
+    text-align: center;
 }
 input{
     font-size: 1.2rem;
@@ -52,22 +81,23 @@ input{
     background-color: white;
     color: black;
 }
+.todos{
+    text-align: center;
+}
+.tasksitems{
+    border: 5px solid rgb(151, 207, 240);
+    width: 50%;
+    margin: 0px auto;
+    padding: 1%;
+    height: auto;
+}
 .footer{
-    position:absolute;
+    position:fixed;
     bottom:0px;
     background-color: lightseagreen;
     width: 100%;
     text-align: center;
     color: white;
     font-size: 1.2rem;
-}
-.completed-items{
-    border:2px solid salmon;
-    margin:2%;
-    padding: 0.5%;
-}
-.uncompleted-items{
-    border:2px solid rgb(90, 126, 90);
-    margin: 2%;
-    padding: 0.5%;
+    height: 15%;
 }
