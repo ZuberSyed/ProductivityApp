@@ -5,13 +5,14 @@ import Header from "./Header"
 import Quotes  from "./Quotes"
 import Footer from "./Footer"
 import Todo from "./Todo"
+
 export default class App extends React.Component{
     constructor(){
         super()
         this.state ={
             quote:[],
             isLoading:false,
-            isLogin:true,
+            isLogin:false,
             title:"Productivity App",
             todo:"",
             list:[],
@@ -50,7 +51,7 @@ export default class App extends React.Component{
                 text:this.state.todo
             }
             const updatedList = this.state.list.concat([updatedData]) 
-            this.setState({list:updatedList}) 
+            this.setState({list:updatedList,todo:""}) 
         }
         handleChecked = (id) =>{
             this.setState(prevState =>{
@@ -92,8 +93,8 @@ export default class App extends React.Component{
         const taskText = this.state.list.length >1 ? "tasks" : "task"
         if(this.state.isLogin){
             return(
-                <div>
-                    <Header title={this.state.title} handleLogin={this.handleLogin}/>
+                <div className="container">
+                    <Header title={this.state.title} handleLogin={this.handleLogin} items={this.state.list}/>
                     {this.state.isLoading ? 
                         <div className="loading"></div> :
                         <Quotes quotes={this.state.quote}
@@ -101,19 +102,18 @@ export default class App extends React.Component{
                     <div className="main">
                     <div className="todoList">
                     <h3>Your Todo list</h3>
-                   <form onSubmit={this.handleSubmit} className="form">
+                    <form onSubmit={this.handleSubmit} className="form" id="todoForm">
                        <input
                         type="text"
-                        placeholder="enter todo"
+                        placeholder="todo Item"
                         name="todo"
                         value={this.state.todo}
                         onChange={this.handleChange}
                       />
-                       <button className="btn">Add Todo</button>
-                       </form> 
+                       <button className="btn">Add todo</button>
+                       </form>
                        <p style={{textAlign:"center",fontSize:"1.2rem"}}>You have added {this.state.list.length} {taskText} to list</p>
-                    </div>
-                       <div className="tasksitems" style={{border:this.state.list.length ===0 ? "none" : "5px solid rgb(151, 207, 240)"}}>
+                       <div className="tasksitems" style={{backgroundColor :this.state.list.length<=0 ? null:"#B1E2EF"}}>
                           {this.state.list.map(item => 
                           <Todo key={item.id} 
                             items={item}
@@ -123,19 +123,21 @@ export default class App extends React.Component{
                             /> )}
                        </div>
                     </div>
+                    </div>
                    <Footer/>
                 </div>
             )}
                 else{
                    //Login Page
                     return(
-                        <div>
+                        <div className="loginPage">
                             <div className="bg"></div>
-                            <div>
+                            <div class="loginContent">
+                            <div className="titles">
                                 <h1>{this.state.title}</h1>
                                 <h2>Increase your Productivity</h2>
                             </div>
-                            <form onSubmit={this.handleLogin}>
+                            <form onSubmit={this.handleLogin} id="loginForm">
                                 <input
                                     type="email"
                                     name="email"
@@ -154,8 +156,9 @@ export default class App extends React.Component{
                                     required
                                 />
                                 <br/>
-                                <button>{this.state.isLogin ? "LogOut" : "LogIn"}</button>
+                                <button className="loginBtn">{this.state.isLogin ? "LogOut" : "LogIn"}</button>
                             </form>
+                            </div>
                         </div>
                     )
                 }

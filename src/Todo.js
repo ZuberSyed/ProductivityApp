@@ -23,23 +23,24 @@ export default class Todo extends React.Component{
             textDecoration:"line-through",
             fontStyle:"italic"
         }
+        const renameText = `Rename ${this.props.items.text}`
         const editingTemplate =(
-               <div>
+               <div className="editTemp">
                    <form onSubmit={this.handlesSubmit}>
                        <input
                            type="text"
-                           placeholder="Rename todo"
+                           placeholder={renameText}
                            name="newName"
                            value={this.state.newName}
                            onChange={this.handlesChange}
                        />
-                       <button onClick={() => this.setState({isEditing:true})}>Save</button>
-                       <button onClick={() => this.setState({isEditing:false})}>Cancel</button>
+                       <button className="saveBtn" onClick={() => this.setState({isEditing:true})}>Save</button>
+                       <button className="delBtn" onClick={() => this.setState({isEditing:false})}>Cancel</button>
                 </form>
                </div>
         )
         const viewTemplate =(
-               <div>                       
+               <div className="viewTemp">                       
                    <label style={this.props.items.complete ? styles : null}>
                        <input
                            type="checkbox"
